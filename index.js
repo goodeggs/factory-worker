@@ -2,6 +2,11 @@ var Hash = require('hashish');
 var Seq = require('seq');
 
 module.exports = {
+  persist: function(obj, callback) {
+    obj.save(function(error) {
+      callback(error, obj);
+    });
+  },
   patterns: {},
   define: function(key, model, def) {
     this.patterns[key] = {
@@ -73,12 +78,11 @@ module.exports = {
       data = {};
     }
 
+    var self = this;
     this.build(model, data, function(err, obj){
       if (err)
         throw(err);
-      obj.save(function(error) {
-        callback(error, obj);
-      })
+      self.persist(obj, callback);
     });
   }
 }

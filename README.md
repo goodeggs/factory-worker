@@ -57,7 +57,11 @@ BlogEntry for a Comment object and set the foreign key accordingly.
 
 *create(factory, [attributes], callback)*
 
-Calls the `build` function followed by calling `save(callback)` on the created object.
+Calls the `build` function followed by calling `persist` with the new object.
+
+*persist(obj, callback)*
+
+Calls `save(callback)` on the object.  Can be overridden to support different persistence methods.
 
 See the `examples` directory for more information.
 
